@@ -1,20 +1,44 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import SplashScreen from './screens/citizen/splash';
+import LoginScreen from './screens/citizen/login';
+import RegisterScreen from './screens/citizen/register';
+import HomeScreen from './screens/citizen/home';
 
 export default function App() {
+  const [showSplash, setShowSplash] = useState(true);
+  const [showRegister, setShowRegister] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  if (showSplash) {
+    return (
+      <SplashScreen
+        onFinish={() => setShowSplash(false)}
+      />
+    );
+  }
+
+  if (isLoggedIn) {
+    return (
+      <HomeScreen
+        onReportIssue={() => {
+          console.log('Report Issue pressed');
+        }}
+      />
+    );
+  }
+
+  if (showRegister) {
+    return (
+      <RegisterScreen
+        onLogin={() => setShowRegister(false)}
+      />
+    );
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <LoginScreen
+      onRegister={() => setShowRegister(true)}
+      onLogin={() => setIsLoggedIn(true)}
+    />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
