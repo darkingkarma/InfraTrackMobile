@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 
 type Props = {
   onFinish: () => void;
@@ -16,15 +16,27 @@ export default function SplashScreen({ onFinish }: Props) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.logo}>InfraTrack</Text>
+      <Image
+        source={require('../../assets/background2.jpg')}
+        style={styles.backgroundImage}
+        resizeMode="cover"
+      />
+      <View style={styles.overlay} />
 
-      <Text style={styles.subtitle}>
-        Infrastructure Issue Reporting
-      </Text>
+      <View style={styles.content}>
+        <Image
+          source={require('../../assets/infralogo.png')}
+          style={styles.logoImage}
+          resizeMode="contain"
+        />
 
-      <Text style={styles.tagline}>
-        Report. Track. Improve.
-      </Text>
+        <Text style={styles.logo}>InfraTrack</Text>
+
+        <Text style={styles.subtitle}>
+          GIS-Enabled Infrastructure{'\n'}Issue Reporting and Monitoring{'\n'}
+          System for DPWH Iligan City
+        </Text>
+      </View>
     </View>
   );
 }
@@ -32,28 +44,44 @@ export default function SplashScreen({ onFinish }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#008080',
+    backgroundColor: '#0A1E3C',
+  },
+
+  backgroundImage: {
+    ...StyleSheet.absoluteFill,
+    width: '100%',
+    height: '100%',
+  },
+
+  overlay: {
+    ...StyleSheet.absoluteFill,
+    backgroundColor: 'rgba(10, 30, 60, 0.35)',
+  },
+
+  content: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 20,
+    paddingHorizontal: 30,
+  },
+
+  logoImage: {
+    width: 130,
+    height: 130,
+    marginBottom: 24,
   },
 
   logo: {
-    fontSize: 40,
+    fontSize: 34,
     fontWeight: 'bold',
     color: '#FFFFFF',
-    marginBottom: 10,
+    marginBottom: 18,
   },
 
   subtitle: {
-    fontSize: 16,
-    color: '#FFFFFF',
-    textAlign: 'center',
-    marginBottom: 20,
-  },
-
-  tagline: {
     fontSize: 14,
-    color: '#E0F2F1',
+    color: '#E0E6F0',
+    textAlign: 'center',
+    lineHeight: 20,
   },
 });

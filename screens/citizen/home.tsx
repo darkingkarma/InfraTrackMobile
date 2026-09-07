@@ -7,16 +7,19 @@ import {
 
 type Props = {
   onReportIssue: () => void;
+  firstName: string;
 };
 
-export default function HomeScreen({ onReportIssue }: Props) {
+export default function HomeScreen({ onReportIssue, firstName,}: Props) {
   return (
     <View style={styles.container}>
 
       {/* Header */}
       <View style={styles.header}>
         <View>
-          <Text style={styles.greeting}>Hello, Citizen! 👋</Text>
+            <Text style={styles.greeting}>
+                Hello, {firstName}! 👋
+            </Text>
           <Text style={styles.subtitle}>
             Help improve your community
           </Text>
