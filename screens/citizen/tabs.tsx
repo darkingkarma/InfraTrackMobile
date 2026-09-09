@@ -5,19 +5,54 @@ import {
 import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
+import {
+  createNativeStackNavigator,
+} from '@react-navigation/native-stack';
 
 import HomeScreen from './home';
 import ProfileScreen from './profile';
+import PersonalInformationScreen from './personal-information';
 
 type Props = {
   firstName: string;
   lastName: string;
-  
-  
   onLogout: () => void;
 };
 
 const Tab = createBottomTabNavigator();
+const ProfileStack = createNativeStackNavigator();
+
+function ProfileStackScreen({
+  firstName,
+  lastName,
+  onLogout,
+}: Props) {
+  return (
+    <ProfileStack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <ProfileStack.Screen name="ProfileHome">
+        {({ navigation }) => (
+          <ProfileScreen
+            firstName={firstName}
+            lastName={lastName}
+            onLogout={onLogout}
+            onPersonalInformation={() =>
+              navigation.navigate('PersonalInformation')
+            }
+          />
+        )}
+      </ProfileStack.Screen>
+
+      <ProfileStack.Screen
+        name="PersonalInformation"
+        component={PersonalInformationScreen}
+      />
+    </ProfileStack.Navigator>
+  );
+}
 
 export default function CitizenTabs({
   firstName,
@@ -31,6 +66,8 @@ export default function CitizenTabs({
           headerShown: false,
         }}
       >
+
+        {/* HOME TAB */}
         <Tab.Screen
           name="Home"
           options={{
@@ -48,6 +85,8 @@ export default function CitizenTabs({
           )}
         </Tab.Screen>
 
+
+        {/* PROFILE TAB */}
         <Tab.Screen
           name="Profile"
           options={{
@@ -56,13 +95,14 @@ export default function CitizenTabs({
           }}
         >
           {() => (
-            <ProfileScreen
+            <ProfileStackScreen
               firstName={firstName}
               lastName={lastName}
               onLogout={onLogout}
             />
           )}
         </Tab.Screen>
+
       </Tab.Navigator>
     </NavigationContainer>
   );

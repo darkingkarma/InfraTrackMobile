@@ -10,12 +10,14 @@ type Props = {
   firstName: string;
   lastName: string;
   onLogout: () => void;
+  onPersonalInformation: () => void;
 };
 
 export default function ProfileScreen({
   firstName,
   lastName,
   onLogout,
+  onPersonalInformation,
 }: Props) {
 
   const handleLogout = () => {
@@ -70,7 +72,10 @@ export default function ProfileScreen({
       {/* Profile Options */}
       <View style={styles.optionsContainer}>
 
-        <TouchableOpacity style={styles.option}>
+        <TouchableOpacity
+          style={styles.option}
+          onPress={onPersonalInformation}
+        >
           <Text style={styles.optionIcon}>
             👤
           </Text>
