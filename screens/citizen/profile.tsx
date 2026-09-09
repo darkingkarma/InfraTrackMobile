@@ -81,7 +81,7 @@ export default function ProfileScreen({
           </Text>
 
           <Text style={styles.optionText}>
-            Personal Information
+            Personal Information 
           </Text>
 
           <Text style={styles.arrow}>
